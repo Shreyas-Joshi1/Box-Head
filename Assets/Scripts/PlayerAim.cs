@@ -5,14 +5,11 @@ public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private Transform rotateObj;
 
-    private InputSystem_Actions inputActions;
     private Camera mainCam;
     private Vector2 mousePosScreen;
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
         mainCam = Camera.main;        //Main Cam reference
     }
 
