@@ -59,20 +59,21 @@ public class EnemyWaveSpawner : MonoBehaviour
         float camWidth = camHeight * mainCamera.aspect;
 
         int edge = Random.Range(0, 4);
+        Vector2 camPos = mainCamera.transform.position;
 
-        switch(edge)
+        switch (edge)
         {
             case 0: // Top
-                spawnPos = new Vector2(Random.Range(-camWidth, camWidth), camHeight + screenMargin);
+                spawnPos = new Vector2(Random.Range(camPos.x - camWidth, camPos.x + camWidth), camPos.y + camHeight + screenMargin);
                 break;
             case 1: // Bottom
-                spawnPos = new Vector2(Random.Range(-camWidth, camWidth), -camHeight - screenMargin);
+                spawnPos = new Vector2(Random.Range(camPos.x - camWidth, camPos.x + camWidth), camPos.y - camHeight - screenMargin);
                 break;
             case 2: // Left
-                spawnPos = new Vector2(-camWidth - screenMargin, Random.Range(-camHeight, camHeight));
+                spawnPos = new Vector2(camPos.x - camWidth - screenMargin, Random.Range(camPos.y - camHeight, camPos.y + camHeight));
                 break;
             case 3: // Right
-                spawnPos = new Vector2(camWidth + screenMargin, Random.Range(-camHeight, camHeight));
+                spawnPos = new Vector2(camPos.x + camWidth + screenMargin, Random.Range(camPos.y - camHeight, camPos.y + camHeight));
                 break;
             default:
                 spawnPos = Vector2.zero;

@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour
 {
     public static event Action OnEnemyDeath;
 
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float damageCooldown = 1f;
 
     private Transform player;
