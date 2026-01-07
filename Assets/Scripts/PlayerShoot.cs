@@ -30,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
         GameObject bulletObj = Instantiate(bullet, firePoint.position, Quaternion.identity);
         Bullet bulletInstance = bulletObj.GetComponent<Bullet>();
 
-        Vector2 shootDir = firePoint.right;
+        Vector2 shootDir = firePoint.right;    //Right is the local positive X direction
         bulletInstance.Fire(shootDir);
     }
 }
