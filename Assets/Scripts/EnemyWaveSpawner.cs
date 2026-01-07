@@ -5,15 +5,24 @@ public class EnemyWaveSpawner : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int baseEnemies = 3;
     [SerializeField] private float screenMargin = 1.5f;
+    [SerializeField] private BoxCollider2D spawnArea;
+    [SerializeField] private LayerMask blockingLayers;
+    [SerializeField] private Transform player;
 
     private int currWave = 1;
     private int enemiesAlive = 0;
     private Camera mainCamera;
+    private float minDisFromPlayer;
 
     private void Awake()
     {
         mainCamera = Camera.main;
         Enemy.OnEnemyDeath += Enemy_OnEnemyDeath;
+
+        float camHeight = mainCamera.orthographicSize;
+        float camWidth = camHeight * mainCamera.aspect;
+
+        minDisFromPlayer = Mathf.Max(camHeight, camWidth);
     }
 
     private void OnDestroy()
@@ -53,8 +62,39 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Vector2 spawnPos = GetRandomSpawnPosition();
+        Vector2 spawnPos = spawnArea.bounds.center;
+
+        for(int i = 0; i < 20; i++)
+        {
+            spawnPos = ClampToPlayArea(GetRandomSpawnPosition());
+
+            if (IsSpawnValid(spawnPos)) break;
+        }
         Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+    }
+
+    private bool IsSpawnValid(Vector2 spawnPos)
+    {
+        if(!IsFarFromPlayer(spawnPos)) return false;
+
+        if(Physics2D.OverlapCircle(spawnPos, 0.4f, blockingLayers) != null) return false;
+
+        return true;
+    }
+
+    private bool IsFarFromPlayer(Vector2 spawnPos)
+    {
+        return Vector2.Distance(spawnPos, player.position) >= minDisFromPlayer;
+    }
+
+    private Vector2 ClampToPlayArea(Vector2 spawnPos)
+    {
+        Bounds b = spawnArea.bounds;
+
+        float clampedX = Mathf.Clamp(spawnPos.x, b.min.x, b.max.x);
+        float clampedY = Mathf.Clamp(spawnPos.y, b.min.y, b.max.y);
+
+        return new Vector2(clampedX, clampedY);
     }
 
     private Vector2 GetRandomSpawnPosition()
