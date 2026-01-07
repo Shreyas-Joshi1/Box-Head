@@ -13,6 +13,17 @@ public class EnemyWaveSpawner : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
+        Enemy.OnEnemyDeath += Enemy_OnEnemyDeath;
+    }
+
+    private void Enemy_OnEnemyDeath()
+    {
+        enemiesAlive--;
+        
+        if(enemiesAlive <= 0)
+        {
+            SpawnWave();
+        }
     }
 
     private void Start()
@@ -29,6 +40,8 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             SpawnEnemy();
         }
+
+        Debug.Log("Starting Wave " + currWave);
 
         currWave++;
     }

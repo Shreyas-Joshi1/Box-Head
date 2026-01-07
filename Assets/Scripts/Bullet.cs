@@ -3,9 +3,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 15f;
-    [SerializeField] private float lifetime = 3f;
+    [SerializeField] private float lifetime = 2f;
 
     private Rigidbody2D rb;
+    private bool hasHit = false;
 
     private void Awake()
     {
@@ -20,6 +21,23 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if(hasHit) return;
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                hasHit = true;
+                enemy.Die();
+                Destroy(gameObject);
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            hasHit = true;
+            Destroy(gameObject);
+        }
     }
 }
