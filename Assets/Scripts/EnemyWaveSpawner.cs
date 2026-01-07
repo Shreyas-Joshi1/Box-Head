@@ -16,6 +16,11 @@ public class EnemyWaveSpawner : MonoBehaviour
         Enemy.OnEnemyDeath += Enemy_OnEnemyDeath;
     }
 
+    private void OnDestroy()
+    {
+        Enemy.OnEnemyDeath -= Enemy_OnEnemyDeath;
+    }
+
     private void Enemy_OnEnemyDeath()
     {
         enemiesAlive--;
@@ -54,6 +59,11 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private Vector2 GetRandomSpawnPosition()
     {
+        if(!mainCamera)
+        {
+            mainCamera = Camera.main;
+        }
+
         Vector2 spawnPos;
         float camHeight = mainCamera.orthographicSize;
         float camWidth = camHeight * mainCamera.aspect;

@@ -10,11 +10,18 @@ public class PlayerAim : MonoBehaviour
 
     private void Awake()
     {
-        mainCam = Camera.main;        //Main Cam reference
+        mainCam = Camera.main;
     }
 
     private void Update()
     {
+        if (!mainCam)
+        {
+            mainCam = Camera.main;
+        }
+
+        if(Time.timeScale == 0f) return;
+
         float distFromCam = 10f;
         mousePosScreen = Mouse.current.position.ReadValue();
         Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, distFromCam));   //Convert to world co-ordinates

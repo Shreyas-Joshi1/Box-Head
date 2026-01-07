@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int health = 50;
+    [SerializeField] private GameObject gameOverUI;
 
     private int currHealth;
 
@@ -23,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        gameObject.SetActive(false);
-        Debug.Log("Player Died!");
+        Time.timeScale = 0f;
+        gameOverUI.SetActive(true);
     }
 }

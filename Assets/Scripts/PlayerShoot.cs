@@ -9,14 +9,15 @@ public class PlayerShoot : MonoBehaviour
     private float nextFireTime = 0f;
     private PlayerInputHandler inputHandler;
 
-    private void Awake()
+    private void OnEnable()
     {
         inputHandler = GetComponent<PlayerInputHandler>();
     }
 
     private void Update()
     {
-        if(Time.time < nextFireTime) return;
+        if (Time.timeScale == 0f) return;
+        if (Time.time < nextFireTime) return;
 
         if (inputHandler.InputActions.Player.Attack.triggered)
         {
