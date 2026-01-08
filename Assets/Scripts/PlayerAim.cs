@@ -24,10 +24,10 @@ public class PlayerAim : MonoBehaviour
 
         float distFromCam = 10f;
         mousePosScreen = Mouse.current.position.ReadValue();
-        Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, distFromCam));   //Convert to world co-ordinates
+        Vector3 mousePosWorld = mainCam.ScreenToWorldPoint(new Vector3(mousePosScreen.x, mousePosScreen.y, distFromCam)); //Convert to world co-ordinates
 
         Vector2 lookDir = (Vector2)mousePosWorld - (Vector2)rotateObj.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;        //Angle calc and convert from radian to degree
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg; //Angle calc and convert from radian to degree
 
         rotateObj.rotation = Quaternion.Euler(0f, 0f, angle);
     }

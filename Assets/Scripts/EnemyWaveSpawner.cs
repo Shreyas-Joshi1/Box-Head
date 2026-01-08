@@ -23,7 +23,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         float camHeight = mainCamera.orthographicSize;
         float camWidth = camHeight * mainCamera.aspect;
 
-        minDisFromPlayer = Mathf.Max(camHeight, camWidth);
+        minDisFromPlayer = Mathf.Max(camHeight, camWidth); //To not spawn enemies too close to player
     }
 
     private void OnDestroy()
@@ -62,11 +62,12 @@ public class EnemyWaveSpawner : MonoBehaviour
         currWave++;
     }
 
+    // Spawns an enemy at a valid position -> not too close to player and not colliding with obstacles
     private void SpawnEnemy()
     {
-        Vector2 spawnPos = spawnArea.bounds.center;
+        Vector2 spawnPos = spawnArea.bounds.center; //Default spawn position
 
-        for(int i = 0; i < 20; i++)
+        for (int i = 0; i < 20; i++) //Try max 20 times to find a valid spawn position
         {
             spawnPos = ClampToPlayArea(GetRandomSpawnPosition());
 
@@ -75,6 +76,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
     }
 
+    // Check if spawn position is valid
     private bool IsSpawnValid(Vector2 spawnPos)
     {
         if(!IsFarFromPlayer(spawnPos)) return false;
@@ -89,12 +91,13 @@ public class EnemyWaveSpawner : MonoBehaviour
         return Vector2.Distance(spawnPos, player.position) >= minDisFromPlayer;
     }
 
+    // Clamp spawn position to within the spawn area bounds
     private Vector2 ClampToPlayArea(Vector2 spawnPos)
     {
         Bounds b = spawnArea.bounds;
 
-        float clampedX = Mathf.Clamp(spawnPos.x, b.min.x, b.max.x);
-        float clampedY = Mathf.Clamp(spawnPos.y, b.min.y, b.max.y);
+        float clampedX = Mathf.Clamp(spawnPos.x, b.min.x, b.max.x); //Clamp X within bounds
+        float clampedY = Mathf.Clamp(spawnPos.y, b.min.y, b.max.y); //Clamp Y within bounds
 
         return new Vector2(clampedX, clampedY);
     }
@@ -107,8 +110,8 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
 
         Vector2 spawnPos;
-        float camHeight = mainCamera.orthographicSize;
-        float camWidth = camHeight * mainCamera.aspect;
+        float camHeight = mainCamera.orthographicSize; // Half height
+        float camWidth = camHeight * mainCamera.aspect; // Half width
 
         int edge = Random.Range(0, 4);
         Vector2 camPos = mainCamera.transform.position;

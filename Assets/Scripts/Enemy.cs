@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy Died");
     }
 
+    // Damage player on collision per frame with cooldown
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))

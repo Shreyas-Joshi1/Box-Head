@@ -23,11 +23,9 @@ public class PlayerMovement : MonoBehaviour
         inputVec = inputHandler.InputActions.Player.Move.ReadValue<Vector2>();
     }
 
-    //Movement Logic
     //Normalize input vector to prevent faster diagonal movement
     private void FixedUpdate()
     {
         rb.linearVelocity = inputVec.normalized * moveSpeed;
-        //Debug.Log(rb.linearVelocity);
     }
 }

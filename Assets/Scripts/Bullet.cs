@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
+    // Handle collision with enemy or obstacle
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(hasHit) return;
