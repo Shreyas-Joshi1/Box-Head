@@ -23,6 +23,13 @@ public class Enemy : MonoBehaviour
         if (!player) return;
 
         Vector2 direction = (player.position - transform.position).normalized;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1.0f);
+        if(hit.collider != null && !hit.collider.CompareTag("Player"))
+        {
+            direction += new Vector2(direction.y, -direction.x) * 0.5f;
+        }
+
         rb.linearVelocity = direction * moveSpeed;
     }
 
