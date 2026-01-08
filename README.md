@@ -56,7 +56,7 @@ The goal of the prototype is to demonstrate:
   - Game Over UI displayed
 - **Restart, Main Menu & Quit Game options** available after Game Over
 
-<video controls src="Last Stand.mp4" title="Title"></video>
+https://github.com/user-attachments/assets/7577aa23-842b-4738-aa57-00a07b35553e
 
 ---
 
@@ -64,9 +64,9 @@ The goal of the prototype is to demonstrate:
 
 | Action | Input |
 |------|------|
-| Move | **W / A / S / D** | **Up / Left / Down / Right** |
+| Move | **W / A / S / D** & **Up / Left / Down / Right** |
 | Aim | **Mouse Cursor** |
-| Shoot | **Left Mouse Button (LMB)** | **Enter** |
+| Shoot | **Left Mouse Button (LMB)** & **Enter** |
 | UI Interaction | Mouse |
 
 ---
