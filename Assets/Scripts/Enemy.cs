@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     {
         OnEnemyDeath?.Invoke();
         Destroy(gameObject);
+        Debug.Log("Enemy Died");
     }
 
     private void OnCollisionStay2D(Collision2D collision)

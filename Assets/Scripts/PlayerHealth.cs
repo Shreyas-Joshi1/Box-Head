@@ -32,5 +32,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameOverUI.SetActive(true);
+        Debug.Log("Player Died");
     }
 }
