@@ -85,11 +85,11 @@ https://github.com/user-attachments/assets/7577aa23-842b-4738-aa57-00a07b35553e
 ### Enemy Spawning & Wave Logic
 - Enemy spawning is managed by a dedicated `EnemyWaveSpawner`
 - Each wave spawns: 
-- enemies = baseEnemies + currentWave
+  - enemies = baseEnemies + currentWave
 - Enemies spawn:
-- Just outside the camera view (screen edges)
-- At a safe distance from the player
-- Only if the position is not blocked by obstacles
+  - Just outside the camera view (screen edges)
+  - At a safe distance from the player
+  - Only if the position is not blocked by obstacles
 - A **global enemy death event** is used to track when enemies die
 - Once all enemies in a wave are defeated, the next wave starts automatically
 - Wave number is displayed using a UI text element
@@ -113,23 +113,10 @@ https://github.com/user-attachments/assets/7577aa23-842b-4738-aa57-00a07b35553e
 ---
 
 ## Project Structure
-Assets/
- |-- Scripts/
- |   |-- PlayerMovement.cs
- |   |-- PlayerAim.cs
- |   |-- PlayerShoot.cs
- |   |-- PlayerInputHandler.cs
- |   |-- PlayerHealth.cs
- |   |-- Enemy.cs
- |   |-- EnemyWaveSpawner.cs
- |   |-- Bullet.cs
- |   |-- GameManager.cs
- |   `-- WaveNumberUI.cs
- |-- Prefabs/
- |   |-- 
- `-- Scenes/
-     |-- MainMenu.unity
-     `-- GameScene.unity
+- Assets
+  - Prefabs
+  - Scenes
+  - Scripts (all gameplay and system scripts)
 
 ---
 
