@@ -1,36 +1,32 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public static event Action OnEnemyDeath;
 
-    [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float damageCooldown = 1f;
 
     private Transform player;
     private Rigidbody2D rb;
     private float nextDamageTime = 0f;
+    private NavMeshAgent agent;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void FixedUpdate()
     {
         if (!player) return;
 
-        Vector2 direction = (player.position - transform.position).normalized;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1.0f);
-        if(hit.collider != null && !hit.collider.CompareTag("Player"))
-        {
-            direction += new Vector2(direction.y, -direction.x) * 0.5f;
-        }
-
-        rb.linearVelocity = direction * moveSpeed;
+        agent.SetDestination(player.position);
     }
 
     public void Die()
