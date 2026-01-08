@@ -98,14 +98,14 @@ https://github.com/user-attachments/assets/7577aa23-842b-4738-aa57-00a07b35553e
 
 ### Damage Detection & Health System
 - **Bullet -> Enemy**
-- Handled via `OnCollisionEnter2D`
-- Enemy is destroyed immediately on hit
+  - Handled via `OnCollisionEnter2D`
+  - Enemy is destroyed immediately on hit
 - **Enemy -> Player**
-- Contact-based damage using `OnCollisionStay2D`
-- Damage cooldown prevents continuous damage every frame
+  - Contact-based damage using `OnCollisionStay2D`
+  - Damage cooldown prevents continuous damage every frame
 - **Player Health**
-- Managed via a centralized `PlayerHealth` component
-- Health is displayed using a UI slider
+  - Managed via a centralized `PlayerHealth` component
+  - Health is displayed using a UI slider
 - On reaching zero health:
   - Time scale is set to zero
   - Game Over UI is shown
