@@ -8,6 +8,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     [SerializeField] private BoxCollider2D spawnArea;
     [SerializeField] private LayerMask blockingLayers;
     [SerializeField] private Transform player;
+    [SerializeField] private WaveNumberUI waveNumberUI;
 
     private int currWave = 1;
     private int enemiesAlive = 0;
@@ -57,6 +58,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
         Debug.Log("Starting Wave " + currWave);
 
+        waveNumberUI.SetWaveNumber(currWave);
         currWave++;
     }
 
